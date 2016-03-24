@@ -4,15 +4,15 @@
 #include "newstring.h"
 
 typedef struct listNode{
-	newString *key;
-	newString *value;
-	struct listNode *next;
+  newString *key;
+  newString *value;
+  struct listNode *next;
 }listNode;
 
 typedef struct linked_list{
-	struct listNode *head;
-	struct listNode *tail;
-	int size;
+  struct listNode *head;
+  struct listNode *tail;
+  int size;
 }linked_list;
 
 linked_list* newLinkedList();
