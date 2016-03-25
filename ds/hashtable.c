@@ -9,7 +9,7 @@ int starting_size = INITIAL_SIZE;
 
 secondaryTable* newSecondaryTable(){
   int i;
-  secondaryTable* st = (secondaryTable*)malloc(sizeof(secondaryTable) + INITIAL_SIZE * sizeof(linked_list *));
+  secondaryTable* st = (secondaryTable*)malloc(sizeof(secondaryTable) + INITIAL_SIZE * sizeof(linkedList *));
   for(i=0;i<starting_size;i++) st->list[i] = newLinkedList();
   st->size = starting_size;
   return st;
@@ -53,7 +53,7 @@ unsigned long getSecondaryHash(char *str){
 }
 
 void set(newString *key, newString *value, hashTable* ht){
-  linked_list* ll;
+  linkedList* ll;
   listNode *tmp=NULL;
   unsigned long p_hash = getPrimaryHash(key->buf) % starting_size;
   unsigned long s_hash = getSecondaryHash(key->buf) % starting_size;
@@ -73,7 +73,7 @@ void set(newString *key, newString *value, hashTable* ht){
 char* get(newString *key, hashTable* ht){
   unsigned long p_hash = getPrimaryHash(key->buf) % starting_size;
   unsigned long s_hash = getSecondaryHash(key->buf) % starting_size;
-  linked_list* ll = ht->table->rooms[p_hash]->list[s_hash];
+  linkedList* ll = ht->table->rooms[p_hash]->list[s_hash];
   listNode* tmp=NULL;
   if(ll->head){
     tmp = findNode(key, ll);
@@ -87,7 +87,7 @@ char* get(newString *key, hashTable* ht){
 
 void printHashTable(hashTable* ht){
   int i=0, j=0;
-  linked_list* ll;
+  linkedList* ll;
   printf("%s %ld\n", "No of keys: ",ht->key_count );
   for(i = 0; i<starting_size; i++){
     for(j = 0; j<starting_size; j++){

@@ -3,8 +3,8 @@
 #include <string.h>
 #include "linkedlist.h"
 
-linked_list* newLinkedList(){
-  linked_list* ll = (linked_list*)malloc(sizeof(linked_list));
+linkedList* newLinkedList(){
+  linkedList* ll = (linkedList*)malloc(sizeof(linkedList));
   ll->head = NULL;
   ll->tail = NULL;
   ll->size = 0;
@@ -19,7 +19,7 @@ listNode* newNode(newString *key,newString *value){
   return tmp;
 }
 
-void addNodeToList(linked_list *list, listNode *temp){
+void addNodeToList(linkedList *list, listNode *temp){
   if(list->head){
     list->tail->next = temp;
     list->tail = list->tail->next;
@@ -30,8 +30,9 @@ void addNodeToList(linked_list *list, listNode *temp){
   list->size++;
 }
 
-void printList(linked_list *list){
+void printList(linkedList *list){
   listNode *tmp = list->head;
+  printf("%s %d\n","Size: ", list->size);
   while(tmp){
     printf("%s %s\n", tmp->key->buf, tmp->value->buf);
     tmp = tmp->next;
@@ -39,7 +40,7 @@ void printList(linked_list *list){
   free(tmp);
 }
 
-listNode* findNode(newString *key, linked_list *list){
+listNode* findNode(newString *key, linkedList *list){
   listNode* tmp = list->head;
   int len = key->len;
   int result;
@@ -62,20 +63,25 @@ void replaceValue(listNode *node, newString *newvalue){
 }
 
 // int main(){
-//  int i, n;
+//  int i, n,l;
+//  newString *k;
+//  newString *v;
 //  scanf("%d", &n);
-//  long arr[20];
 //  listNode *temp;
-//  char *str1 = "Arun\0";
-//  char *str2 = "Kaushik\0";
+//  char key[100]; 
+//  char value[100]; 
 
-//  for(i=0;i<n;i++) scanf("%ld", &arr[i]);
-
-//  linked_list* list = newLinkedList();
+//  linkedList* list = newLinkedList();
   
 //  for(i = 0; i<n; i++){
-//    temp = newNode(str1, str2, arr[i]);
-//    addlistNodeToList(list, temp);
+//     scanf("%s", key);
+//     scanf("%s", value);
+//     l = strlen(key);
+//     k = buildNewString(key, l);
+//     l = strlen(value);
+//     v = buildNewString(value,l);
+//     temp = newNode(k, v);
+//     addNodeToList(list, temp);
 //  }
 //  printList(list);
 //  free(temp);

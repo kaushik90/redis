@@ -9,17 +9,17 @@ typedef struct listNode{
   struct listNode *next;
 }listNode;
 
-typedef struct linked_list{
+typedef struct linkedList{
   struct listNode *head;
   struct listNode *tail;
   int size;
-}linked_list;
+}linkedList;
 
-linked_list* newLinkedList();
+linkedList* newLinkedList();
 listNode* newNode(newString *, newString *);
-void addNodeToList(linked_list *, listNode *);
-void printList(linked_list *);
-listNode* findNode(newString *key, linked_list *list);
+void addNodeToList(linkedList *, listNode *);
+void printList(linkedList *);
+listNode* findNode(newString *key, linkedList *list);
 void replaceValue(listNode *tmp, newString *value);
 
 #endif
