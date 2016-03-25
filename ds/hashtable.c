@@ -1,25 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "linkedlist.h"
 #include "hashtable.h"
-#include "constants.h"
-
-int starting_size = INITIAL_SIZE;
 
 secondaryTable* newSecondaryTable(){
   int i;
   secondaryTable* st = (secondaryTable*)malloc(sizeof(secondaryTable) + INITIAL_SIZE * sizeof(linkedList *));
-  for(i=0;i<starting_size;i++) st->list[i] = newLinkedList();
-  st->size = starting_size;
+  //for(i=0;i<INITIAL_SIZE;i++) st->list[i] = newLinkedList();
+  st->size = INITIAL_SIZE;
   return st;
 }
 
 primaryTable* newPrimaryTable(){
   int i;
   primaryTable* pt = (primaryTable*)malloc(sizeof(primaryTable) + INITIAL_SIZE * sizeof(secondaryTable *));
-  for(i=0;i<starting_size;i++) pt->rooms[i]=newSecondaryTable();
-  pt->size = starting_size;
+  for(i=0;i<INITIAL_SIZE;i++) pt->rooms[i]=newSecondaryTable();
+  pt->size = INITIAL_SIZE;
   return pt;
 }
 
@@ -30,73 +26,6 @@ hashTable* newHashTable(){
   ht->key_count = 0;
   ht->collision_ratio = 0;
   return ht;
-}
-
-unsigned long getPrimaryHash(char *str){
-  unsigned long hash = 5381;
-  int c;
-  while (*str != '\0'){
-    c = *str++;
-    hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-  }
-  return hash;
-}
-
-unsigned long getSecondaryHash(char *str){
-  unsigned long hash = 0;
-  int c;
-  while (*str != '\0'){
-    c = *str++;
-    hash = c + (hash << 6) + (hash << 16) - hash;
-  }
-  return hash;
-}
-
-void set(newString *key, newString *value, hashTable* ht){
-  linkedList* ll;
-  listNode *tmp=NULL;
-  unsigned long p_hash = getPrimaryHash(key->buf) % starting_size;
-  unsigned long s_hash = getSecondaryHash(key->buf) % starting_size;
-  ll = ht->table->rooms[p_hash]->list[s_hash];
-  if(ll->head){
-    tmp = findNode(key, ll);
-  }
-  if(tmp){
-    replaceValue(tmp, value);
-  }else{
-    tmp = newNode(key, value);
-    addNodeToList(ll, tmp);
-    ht->key_count++;
-  }
-}
-
-char* get(newString *key, hashTable* ht){
-  unsigned long p_hash = getPrimaryHash(key->buf) % starting_size;
-  unsigned long s_hash = getSecondaryHash(key->buf) % starting_size;
-  linkedList* ll = ht->table->rooms[p_hash]->list[s_hash];
-  listNode* tmp=NULL;
-  if(ll->head){
-    tmp = findNode(key, ll);
-  }
-  if(tmp){
-    return tmp->value->buf;
-  }else{
-    return NULL;
-  }
-}
-
-void printHashTable(hashTable* ht){
-  int i=0, j=0;
-  linkedList* ll;
-  printf("%s %ld\n", "No of keys: ",ht->key_count );
-  for(i = 0; i<starting_size; i++){
-    for(j = 0; j<starting_size; j++){
-      ll = ht->table->rooms[i]->list[j];
-      printf("%d %d %s\n", i, j, "----------------------- START ----------------------------" );
-      printList(ll);
-      printf("%d %d %s\n", i, j, "----------------------- END ------------------------------" );
-    }
-  }
 }
 
 // int main(){

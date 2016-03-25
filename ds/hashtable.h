@@ -1,5 +1,7 @@
 #ifndef HASHTABLE_H_   /* Include guard */
 #define HASHTABLE_H_
+#include "linkedlist.h"
+#include "constants.h"
 
 typedef struct secondaryTable
 {
@@ -19,5 +21,9 @@ typedef struct hashTable
   unsigned int collision_ratio;
   struct primaryTable *table;
 }hashTable;
+
+hashTable* newHashTable();
+primaryTable* newPrimaryTable();
+secondaryTable* newSecondaryTable();
 
 #endif
