@@ -7,7 +7,7 @@ typedef struct newString
   char buf[];
 }newString;
 
-newString* buildNewString(void *, size_t);
+newString* buildNewString(void *, long);
 void printString(newString*);
 
 #endif

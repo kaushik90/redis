@@ -6,7 +6,7 @@
 typedef struct secondaryTable
 {
   unsigned long size;
-  struct linkedList *list[];
+  void *list[];
 }secondaryTable;
 
 typedef struct primaryTable

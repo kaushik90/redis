@@ -2,8 +2,9 @@
 #define HASHMAP_H_
 #include "utils.h"
 
-void set(newString *, newString *, hashTable*);
-char* get(newString *, hashTable*);
+hashTable* newHashMap();
+cmdResult* setHashMap( hashTable*, newString *, newString *);
+cmdResult* getHashMap( hashTable*, newString *);
 void printHashTable(hashTable*);
 
 #endif

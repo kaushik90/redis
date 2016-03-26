@@ -5,8 +5,8 @@
 
 secondaryTable* newSecondaryTable(){
   int i;
-  secondaryTable* st = (secondaryTable*)malloc(sizeof(secondaryTable) + INITIAL_SIZE * sizeof(linkedList *));
-  //for(i=0;i<INITIAL_SIZE;i++) st->list[i] = newLinkedList();
+  secondaryTable* st = (secondaryTable*)malloc(sizeof(secondaryTable) + INITIAL_SIZE * sizeof(void *));
+  for(i=0;i<INITIAL_SIZE;i++) st->list[i] = NULL;
   st->size = INITIAL_SIZE;
   return st;
 }

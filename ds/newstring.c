@@ -3,8 +3,8 @@
 #include <string.h>
 #include "newstring.h"
 
-newString* buildNewString(void *source, size_t len){
-  newString *str = malloc(sizeof (newString)+ len + 1);
+newString* buildNewString(void *source, long len){
+  newString *str = (newString*)malloc(sizeof (newString)+ len + 1);
   str->len = len;
   if (len) {
     if (source) memcpy(str->buf, source, len);
